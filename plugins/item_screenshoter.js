@@ -291,17 +291,13 @@
       }
 
       let targetPos = [(BBox.minXYZ[0] + BBox.maxXYZ[0]) / 2, (BBox.minXYZ[1] + BBox.maxXYZ[1]) / 2, (BBox.minXYZ[2] + BBox.maxXYZ[2]) / 2];
-      let distMultiplier = 1.2;
+      let distMultiplier = 1.3;
       let cameraAxisDist = Math.round(maxValue(BBox.maxXYZ, BBox.minXYZ) * distMultiplier);
 
-      let camera_pos = [
-        [-cameraAxisDist, cameraAxisDist, -cameraAxisDist], 
-        [cameraAxisDist, cameraAxisDist, -cameraAxisDist], 
-        [cameraAxisDist, cameraAxisDist, cameraAxisDist], 
-        [-cameraAxisDist, cameraAxisDist, cameraAxisDist],
-      ];
-
       if (DEBUG_MODE) console.log(cameraAxisDist);
+      if (DEBUG_MODE) console.log(`Zoom: ${preview.camOrtho.zoom}`);
+
+      
 
       let preset = {
         name: 'item_texturer',
@@ -309,8 +305,7 @@
         projection: 'orthographic',
         position: [-cameraAxisDist, cameraAxisDist, -cameraAxisDist],
         target: [0, (BBox.minXYZ[1] + BBox.maxXYZ[1]) / 2, 0],
-        zoom: 0.5
-        
+        zoom: preview.camOrtho.zoom
       };
 
       preview.loadAnglePreset(preset);
